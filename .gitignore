@@ -1,0 +1,27 @@
+# Node / Frontend
+**/node_modules/
+frontend/dist/
+frontend/.env
+
+# Java / Maven
+**/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# OS & Temp directories
+Thumbs.db
+Desktop.ini
+.DS_Store
+chrome_inspect_temp/
+chrome_test_temp*/
+edge_temp/
+
+# Logs
+*.log
+

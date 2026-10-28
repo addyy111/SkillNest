@@ -1,0 +1,21 @@
+sequenceDiagram
+    actor Student
+    participant React as React Client (Quiz.jsx)
+    participant Ctrl as QuizController (/api/quizzes)
+    participant Svc as TestAttemptService
+    participant DB as MySQL Database
+    participant Mail as JavaMail / SMTP
+
+    Student->>React: 1. Click "Submit Test" or Timer Expires
+    React->>Ctrl: 2. POST /api/quizzes/{id}/submit (TestSubmissionDTO)
+    Ctrl->>Svc: 3. submitTestAttempt(quizId, submissionDTO)
+    Svc->>DB: 4. SELECT questions FROM quiz WHERE id = {id}
+    DB-->>Svc: 5. Return Quiz with real Answers & Marks
+    Note over Svc: 6. Compare answers, calculate score,<br/>percentage, and pass/fail status
+    Svc->>DB: 7. INSERT INTO test_attempt (...)
+    DB-->>Svc: 8. Transaction Committed (201 Created)
+    Svc->>Mail: 9. sendScorecardEmail(student, attempt, quiz)
+    Mail-->>Svc: 10. Email Status (SENT / NOT_CONFIGURED)
+    Svc-->>Ctrl: 11. Return TestResultResponseDTO with reviews
+    Ctrl-->>React: 12. HTTP 200 OK (Scorecard, Questions & Explanations)
+    React-->>Student: 13. Render QuizResult.jsx Performance HUD

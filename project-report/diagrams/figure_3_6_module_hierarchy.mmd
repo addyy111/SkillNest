@@ -1,0 +1,28 @@
+flowchart TD
+    Root["SkillNest Platform Core Architecture"]
+
+    Mod1["1.0 Security & Identity Management"]
+    Mod2["2.0 Student Learning & Practice Portal"]
+    Mod3["3.0 Assessment & Anti-Cheat Engine"]
+    Mod4["4.0 Administrative Operations & Content CMS"]
+
+    Root --> Mod1
+    Root --> Mod2
+    Root --> Mod3
+    Root --> Mod4
+
+    Mod1 --> M1_1["1.1 User Auth API (/register, /login)"]
+    Mod1 --> M1_2["1.2 Route Guards (ProtectedRoute, AdminGuard)"]
+    Mod1 --> M1_3["1.3 BCrypt Salted Password Hashing"]
+
+    Mod2 --> M2_1["2.1 9-Domain Question Hub (Java, Python, SQL...)"]
+    Mod2 --> M2_2["2.2 Interactive MCQ Practice & Explanations"]
+    Mod2 --> M2_3["2.3 LocalStorage Bookmarks & Demo Progress"]
+
+    Mod3 --> M3_1["3.1 Timed Assessment HUD & Navigation Palette"]
+    Mod3 --> M3_2["3.2 Anti-Cheat DTO Sanitizer (/take endpoint)"]
+    Mod3 --> M3_3["3.3 Automated Scoring Engine & Email Dispatcher"]
+
+    Mod4 --> M4_1["4.1 Question Bank Management (CRUD & Seeder)"]
+    Mod4 --> M4_2["4.2 Quiz Builder & Publish/Draft State Toggling"]
+    Mod4 --> M4_3["4.3 User Directory & Test Attempt Audits"]

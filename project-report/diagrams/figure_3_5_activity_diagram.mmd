@@ -1,0 +1,13 @@
+flowchart TD
+    Start([Start Test Session]) --> SelectQuiz[Select Published Test & Review Instructions]
+    SelectQuiz --> FetchAntiCheat[Fetch Stripped Questions via /take Anti-Cheat API]
+    FetchAntiCheat --> StartTimer[Initialize Live Countdown Timer & Palette]
+    StartTimer --> AnswerQ[Navigate Questions, Select Options, Flag for Review]
+    AnswerQ --> CheckTime{Time Expired or Manual Submit?}
+    CheckTime -- No --> AnswerQ
+    CheckTime -- Yes --> PostSubmit[POST TestSubmissionDTO to /submit]
+    PostSubmit --> Grade[Server Evaluates Answers against Database Keys]
+    Grade --> Persist[Persist TestAttempt Entity with Metrics]
+    Persist --> TriggerMail[Dispatch HTML Scorecard Email via SMTP]
+    TriggerMail --> RenderResult[Display Instant Scorecard, Analysis & Explanations]
+    RenderResult --> EndNode([Session Complete])

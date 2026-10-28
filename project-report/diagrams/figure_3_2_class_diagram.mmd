@@ -1,0 +1,66 @@
+classDiagram
+    class User {
+        -Long id
+        -String name
+        -String email
+        -String password
+        -String role
+        +getId() Long
+        +getName() String
+        +getEmail() String
+        +getRole() String
+    }
+    class Quiz {
+        -Long id
+        -String title
+        -String category
+        -int duration
+        -String description
+        -String difficulty
+        -int totalMarks
+        -int passingMarks
+        -String status
+        -Set~Question~ questions
+        +getQuestions() Set~Question~
+        +computeTotalMarks() void
+        +computePassingMarks() void
+    }
+    class Question {
+        -Long id
+        -String title
+        -String category
+        -String topic
+        -String difficulty
+        -String optionA
+        -String optionB
+        -String optionC
+        -String optionD
+        -int answer
+        -String explanation
+        -int marks
+        +getAnswer() int
+        +getExplanation() String
+    }
+    class TestAttempt {
+        -Long id
+        -User student
+        -Quiz quiz
+        -int score
+        -int totalMarks
+        -double percentage
+        -boolean passed
+        -int correctCount
+        -int incorrectCount
+        -int unansweredCount
+        -int timeTakenSeconds
+        -LocalDateTime submittedAt
+        -String emailStatus
+        -String answersJson
+        +evaluateScore() void
+        +isPassing() boolean
+        +getAnswersMap() Map
+    }
+
+    User "1" <-- "*" TestAttempt : owns
+    Quiz "1" <-- "*" TestAttempt : records
+    Quiz "*" <--> "*" Question : quiz_questions (Join)

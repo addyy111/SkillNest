@@ -1,0 +1,50 @@
+classDiagram
+    class u1_User {
+        id = 101
+        name = "Aditya Narwade"
+        email = "aditya@mitwpu.edu"
+        role = "STUDENT"
+        password = "$2a$10$e8Z..."
+    }
+    class ta1_TestAttempt {
+        id = 5001
+        student_id = 101
+        quiz_id = 201
+        score = 18
+        total_marks = 20
+        percentage = 90.0
+        passed = true
+        email_status = "SENT"
+    }
+    class q1_Quiz {
+        id = 201
+        title = "Java OOP & Streams"
+        category = "Java"
+        duration = 30
+        total_marks = 20
+        passing_marks = 10
+        status = "PUBLISHED"
+    }
+    class qn1_Question {
+        id = 1001
+        title = "Which collection is thread-safe?"
+        category = "Java"
+        topic = "Collections"
+        difficulty = "Medium"
+        answer = 2 (ConcurrentHashMap)
+        marks = 1
+    }
+    class qn2_Question {
+        id = 1002
+        title = "What is JVM memory structure?"
+        category = "Java"
+        topic = "JVM Architecture"
+        difficulty = "Hard"
+        answer = 1 (Heap and Stack)
+        marks = 1
+    }
+
+    u1_User --> ta1_TestAttempt : submits
+    ta1_TestAttempt --> q1_Quiz : evaluates
+    q1_Quiz --> qn1_Question : contains
+    q1_Quiz --> qn2_Question : contains
